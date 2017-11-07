@@ -1,0 +1,38 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main(){
+    cout<<"Enter the number of processes-";
+    int n; cin>>n;
+
+    int btime[n];
+    for (int i=0;i<n;i++){
+        cout<<"Burst-time of P"+to_string(i)<<'\t';
+        cin>>btime[i];
+    }
+
+    int wtime[n]; wtime[0]=0;
+    int ttime[n];
+
+    for (int i=1;i<n;i++){
+        wtime[i]=wtime[i-1]+btime[i-1];
+    }
+
+    for (int i=0;i<n;i++){
+        ttime[i]=wtime[i]+btime[i];
+    }
+    int avgwtime=0;int avgttime=0;
+    for (int i=0;i<n;i++){
+        cout<<"P"+to_string(i)<<'\t'<<"wtime-"<<wtime[i]<<'\t'<<"ttime"<<ttime[i]<<endl;
+        avgwtime = avgwtime+wtime[i];
+        avgttime = avgttime+ttime[i];
+    }
+    cout<<endl; cout<<endl;
+    cout<<"Avg waiting time-"<<(float)avgwtime/(float)n<<endl;
+    cout<<"Avg turnaround time-"<<(float)avgttime/(float)n<<endl;;
+
+
+
+return 0;
+}
