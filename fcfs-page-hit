@@ -1,0 +1,65 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+int check(string a, string b){
+    int flag = 0;
+    string temp = "";
+    for (int i=0;i<b.length();i++){
+            temp=b[i];
+        if (a.compare(temp)==0){
+            return 1;
+            flag = 1;
+        }
+        temp="";
+
+    }
+    if (flag ==0){
+        return 0;
+    }
+
+}
+
+string updateframe(string a , string b){
+    b=b+a;
+    string temp;
+    for (int i=1;i<b.length();i++){
+        temp=temp+b[i];
+    }
+    return temp;
+}
+
+int main(){
+    string s;cout<<"Enter the Page Sequence stream"<<endl;cin>>s;
+    string frame;int n;
+    cout <<"Enter the frame size-";cin>>n;
+    int pghits=0;
+
+    for (int i=0;i<n;i++){
+        frame=frame+s[i];
+    }
+    cout<<frame<<endl;;
+    string temp="";
+    for (int i=n;i<s.length();i++){
+            temp = s[i];
+        if (check(temp,frame)==1){
+            cout<<frame<<'\t'<<"Page-hit";pghits=pghits+1;
+
+        }
+        else{
+            frame = updateframe(temp,frame);
+            cout<<frame<<'\t';
+        }
+
+    }
+    for (int i=0;i<2;i++){
+    cout<<endl;
+    }
+
+    cout<<"No. of Page Hits- "<<pghits;
+
+
+
+
+return 0;
+}
