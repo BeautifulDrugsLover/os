@@ -1,0 +1,38 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+struct process{
+    string p;
+    int dur;
+};
+bool com(process a, process b){
+    if (a.dur>b.dur){return 0;}
+    else{return 1 ;}
+}
+int main(){
+    int n;cout<<"Enter the number of processes=";cin>>n;
+
+    process a[n];
+    for (int i=0;i<n;i++){
+        a[i].p="P"+to_string(i);cout<<a[i].p<<" ";
+        cin>>a[i].dur;
+    }
+
+    sort (a,a+n,com);
+    int wt[n];wt[0]=0;int tat[n];
+    for (int i=1;i<n;i++){
+        wt[i]=wt[i-1]+a[i].dur;
+    }
+    cout<<"Order of Execution";
+    for (int i=0;i<n;i++){
+        cout<<a[i].p;
+        tat[i]=wt[i]+a[i].dur;
+    }
+
+
+
+
+    return 0;
+}
